@@ -237,25 +237,35 @@ def draw_lead(cv, x0, y0, x1, y1):
         cv.fill(dx, deck_y + 6, dx + 22, deck_y + 10, YELLOW)
     for dx in range(x0 + 640, x1 - 30, 44):
         cv.fill(dx, deck_y + 6, dx + 22, deck_y + 10, YELLOW)
-    # suspension cables from towers to broken ends
-    cv.line(x0 + 159, deck_y - 148, x0 + 428, deck_y, GREY, 2)
-    cv.line(x0 + 789, deck_y - 148, x0 + 612, deck_y, GREY, 2)
-    # broken arch: two jagged stubs hanging at the gap
-    cv.poly([(x0 + 430, deck_y), (x0 + 470, deck_y - 60), (x0 + 486, deck_y - 52),
-             (x0 + 452, deck_y + 4)], (170, 172, 178))
-    cv.poly([(x0 + 610, deck_y), (x0 + 572, deck_y - 58), (x0 + 556, deck_y - 50),
-             (x0 + 588, deck_y + 4)], (170, 172, 178))
-    # collapsed span plunging into the water (narrowed, tilted deck + debris)
-    cv.poly([(x0 + 436, deck_y + 4), (x0 + 604, deck_y + 4), (x0 + 550, wy + 62),
-             (x0 + 490, wy + 62)], (150, 152, 158))
-    cv.poly([(x0 + 490, wy + 62), (x0 + 550, wy + 62), (x0 + 540, wy + 92),
-             (x0 + 500, wy + 92)], (110, 112, 118))
-    # deck markings on the falling span: pale railing edges + dashed centre line
-    cv.line(x0 + 440, deck_y + 6, x0 + 492, wy + 60, (226, 228, 232), 2)
-    cv.line(x0 + 600, deck_y + 6, x0 + 548, wy + 60, (226, 228, 232), 2)
-    for _dy in range(0, 72, 18):
-        _yy = deck_y + 12 + _dy
-        cv.fill(x0 + 516, _yy, x0 + 524, _yy + 9, YELLOW)
+    # suspension cables from towers to broken ends: snapped cables sag
+    # in two segments, midpoint hanging below the straight line
+    cv.line(x0 + 159, deck_y - 148, x0 + 300, deck_y - 40, GREY, 2)
+    cv.line(x0 + 300, deck_y - 40, x0 + 428, deck_y, GREY, 2)
+    cv.line(x0 + 789, deck_y - 148, x0 + 700, deck_y - 40, GREY, 2)
+    cv.line(x0 + 700, deck_y - 40, x0 + 612, deck_y, GREY, 2)
+    # broken arch: two large jagged stubs hanging at the gap
+    cv.poly([(x0 + 430, deck_y), (x0 + 452, deck_y - 84), (x0 + 472, deck_y - 66),
+             (x0 + 486, deck_y - 88), (x0 + 500, deck_y - 52), (x0 + 488, deck_y - 20),
+             (x0 + 462, deck_y - 28), (x0 + 448, deck_y + 2)], (170, 172, 178))
+    cv.poly([(x0 + 610, deck_y), (x0 + 588, deck_y - 82), (x0 + 568, deck_y - 64),
+             (x0 + 554, deck_y - 86), (x0 + 540, deck_y - 50), (x0 + 552, deck_y - 18),
+             (x0 + 578, deck_y - 26), (x0 + 592, deck_y + 2)], (170, 172, 178))
+    # collapsed span plunging into the water: one tilted plank, hinged at the
+    # left break, low end ~70 px down at the waterline (~27 deg). Its top
+    # edge is a diagonal, so a clear dark gap stays open between the two
+    # deck ends at deck level.
+    cv.poly([(x0 + 448, deck_y + 4), (x0 + 592, deck_y + 72), (x0 + 580, deck_y + 84),
+             (x0 + 436, deck_y + 16)], (150, 152, 158))
+    # submerged end of the span, continuing below the waterline
+    cv.poly([(x0 + 540, wy + 18), (x0 + 592, wy + 18), (x0 + 576, wy + 64),
+             (x0 + 524, wy + 64)], (110, 112, 118))
+    # deck markings on the falling span: pale railing edges along the tilt
+    cv.line(x0 + 454, deck_y + 12, x0 + 584, deck_y + 77, (226, 228, 232), 2)
+    cv.line(x0 + 442, deck_y + 14, x0 + 574, deck_y + 80, (226, 228, 232), 2)
+    # centre dashes, short and tilted with the span (no vertical dashes)
+    cv.line(x0 + 500, deck_y + 39, x0 + 514, deck_y + 46, YELLOW, 2)
+    cv.line(x0 + 532, deck_y + 55, x0 + 546, deck_y + 62, YELLOW, 2)
+    cv.line(x0 + 562, deck_y + 70, x0 + 574, deck_y + 76, YELLOW, 2)
     cv.poly([(x0 + 560, wy + 30), (x0 + 596, wy + 44), (x0 + 580, wy + 58),
              (x0 + 552, wy + 46)], (130, 132, 138))
     cv.poly([(x0 + 430, wy + 44), (x0 + 462, wy + 34), (x0 + 472, wy + 52),
@@ -266,20 +276,41 @@ def draw_lead(cv, x0, y0, x1, y1):
     cv.fill(x0 + 606, wy + 68, x0 + 620, wy + 72, YELLOW)
     cv.poly([(x0 + 424, wy + 78), (x0 + 450, wy + 70), (x0 + 458, wy + 86),
              (x0 + 432, wy + 92)], (130, 132, 138))
-    # splash
-    cv.circle(x0 + 515, wy + 70, 26, (210, 228, 238))
-    cv.circle(x0 + 515, wy + 62, 18, WHITE)
-    # explosion glow at both break points
-    cv.circle(x0 + 436, deck_y - 6, 34, ORANGE)
-    cv.circle(x0 + 436, deck_y - 6, 20, YELLOW)
-    cv.circle(x0 + 606, deck_y - 6, 30, ORANGE)
-    cv.circle(x0 + 606, deck_y - 6, 17, YELLOW)
+    # plume where the span meets the water: fan of white spray triangles
+    # plus scattered droplets, at the water entry point (x0 + 582)
+    cv.poly([(x0 + 566, wy + 8), (x0 + 574, wy - 34), (x0 + 582, wy + 8)], WHITE)
+    cv.poly([(x0 + 584, wy + 6), (x0 + 596, wy - 26), (x0 + 604, wy + 8)], (210, 228, 238))
+    cv.poly([(x0 + 550, wy + 6), (x0 + 556, wy - 20), (x0 + 564, wy + 8)], (210, 228, 238))
+    cv.circle(x0 + 570, wy - 40, 3, WHITE)
+    cv.circle(x0 + 592, wy - 32, 3, WHITE)
+    cv.circle(x0 + 606, wy - 14, 2, WHITE)
+    cv.circle(x0 + 552, wy - 26, 2, (210, 228, 238))
+    cv.fill(x0 + 560, wy + 2, x0 + 606, wy + 8, WHITE)
+    # explosion starbursts at both break points: jagged 12-point stars,
+    # orange outer + yellow core
+    def _burst(cx, cy, r_out, r_in, n=12):
+        import math
+        pts = []
+        for k in range(2 * n):
+            r = r_out if k % 2 == 0 else r_in
+            a = math.pi * k / n
+            pts.append((cx + int(r * math.cos(a)), cy + int(r * math.sin(a))))
+        return pts
+    cv.poly(_burst(x0 + 436, deck_y - 6, 40, 20), ORANGE)
+    cv.poly(_burst(x0 + 436, deck_y - 6, 24, 12), YELLOW)
+    cv.poly(_burst(x0 + 606, deck_y - 6, 36, 18), ORANGE)
+    cv.poly(_burst(x0 + 606, deck_y - 6, 21, 10), YELLOW)
     # smoke columns
     for (sx, sy, r) in [(x0 + 430, deck_y - 70, 26), (x0 + 452, deck_y - 108, 32),
                         (x0 + 420, deck_y - 140, 24), (x0 + 610, deck_y - 66, 24),
                         (x0 + 626, deck_y - 100, 28)]:
         cv.circle(sx, sy, r, SMOKE)
         cv.circle(sx - 8, sy - 6, r - 8, (170, 170, 176))
+    # flame tongues licking sideways out of the blasts, clear of the smoke
+    cv.poly([(x0 + 400, deck_y - 6), (x0 + 378, deck_y - 14), (x0 + 400, deck_y + 6)], ORANGE)
+    cv.poly([(x0 + 472, deck_y - 6), (x0 + 494, deck_y - 14), (x0 + 472, deck_y + 6)], ORANGE)
+    cv.poly([(x0 + 570, deck_y - 6), (x0 + 548, deck_y - 14), (x0 + 570, deck_y + 6)], ORANGE)
+    cv.poly([(x0 + 642, deck_y - 6), (x0 + 664, deck_y - 14), (x0 + 642, deck_y + 6)], ORANGE)
     # headline band over the sky
     cv.fill(x0, y0 + 14, x1, y0 + 96, DARKRED)
     cv.text_c((x0 + x1) // 2, y0 + 18, "KERCH BRIDGE DOWN", 6, WHITE)
@@ -307,6 +338,23 @@ def draw_quad(cv, x0, y0, x1, y1):
         cx = x0 + 62 + i * 122
         cv.circle(cx, cy - 4, 24, hairs[i])          # hair cap
         cv.circle(cx, cy + 5, 21, skins[i])          # face
+        # distinguishing hair per leader
+        if i == 0:  # Trump: blond fringe swept to the side
+            cv.poly([(cx - 22, cy - 6), (cx - 2, cy - 20), (cx + 22, cy - 10),
+                     (cx + 18, cy - 2), (cx - 10, cy - 8)], (232, 200, 100))
+        elif i == 1:  # Modi: white beard + white temples
+            cv.poly([(cx - 15, cy + 6), (cx + 15, cy + 6), (cx + 12, cy + 24),
+                     (cx - 12, cy + 24)], (245, 245, 245))
+            cv.circle(cx - 19, cy - 4, 5, (245, 245, 245))
+            cv.circle(cx + 19, cy - 4, 5, (245, 245, 245))
+        elif i == 2:  # Takaichi: dark bob down both sides of the face
+            cv.poly([(cx - 25, cy - 12), (cx - 14, cy - 12), (cx - 16, cy + 16),
+                     (cx - 25, cy + 14)], (35, 35, 38))
+            cv.poly([(cx + 25, cy - 12), (cx + 14, cy - 12), (cx + 16, cy + 16),
+                     (cx + 25, cy + 14)], (35, 35, 38))
+        else:  # Albanese: grey swept hair
+            cv.poly([(cx - 21, cy - 8), (cx, cy - 19), (cx + 21, cy - 8),
+                     (cx + 17, cy - 14), (cx - 17, cy - 14)], (168, 168, 173))
         cv.poly([(cx - 30, y1 - 78), (cx + 30, y1 - 78), (cx + 22, cy + 22),
                  (cx - 22, cy + 22)], suits[i])      # shoulders
     # table
@@ -365,15 +413,22 @@ def draw_cyclone(cv, x0, y0, x1, y1):
     for r, col in [(36, WHITE), (28, (140, 180, 210)), (20, WHITE),
                    (12, (90, 140, 190)), (5, NAVY)]:
         cv.circle(cx, cy, r, col)
-    # spiral arms
+    # spiral arms: curved 3-segment arms winding out from the eye
     for a in range(0, 360, 45):
         import math
-        r0 = 7
-        x2 = cx + int(30 * math.cos(math.radians(a)))
-        y2 = cy + int(30 * math.sin(math.radians(a)))
-        cv.line(cx + int(r0 * math.cos(math.radians(a))),
-                cy + int(r0 * math.sin(math.radians(a))), x2, y2, WHITE, 4)
-    cv.text_c((x0 + x1) // 2, y1 - 36, "130 KM/H - FRI 20 NOV", 2, INK)
+        pts = []
+        for k in range(4):
+            ang = math.radians(a + k * 18)
+            r = 7 + k * 8
+            pts.append((cx + int(r * math.cos(ang)), cy + int(r * math.sin(ang))))
+        for j in range(len(pts) - 1):
+            cv.line(pts[j][0], pts[j][1], pts[j + 1][0], pts[j + 1][1], WHITE, 4)
+    # Bay of Bengal coastline down the right edge, below-right of the swirl
+    # (the bottom band is taken by the two caption lines, so the coast
+    # runs vertically at the panel's right edge instead)
+    cv.line(x1 - 24, y0 + 52, x1 - 38, y0 + 78, TEAL, 3)
+    cv.line(x1 - 38, y0 + 78, x1 - 22, y0 + 102, TEAL, 3)
+    cv.text_c((x0 + x1) // 2, y1 - 36, "TO 130 KM/H - FRI 20 NOV", 2, INK)
     cv.text_c((x0 + x1) // 2, y1 - 18, "610 KM EAST OF CHENNAI", 2, DARKRED)
 
 
