@@ -4,7 +4,7 @@
 [![rank](https://make.fun/badge/news-image-20261117/bigpig-collab/bigpig-news-news-image-20261117/rank.svg)](https://make.fun/bounty/news-image-20261117/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261117)
 [![reward](https://make.fun/badge/news-image-20261117/bigpig-collab/bigpig-news-news-image-20261117/reward.svg)](https://make.fun/bounty/news-image-20261117?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261117)
 
-Sum up 17 November's world news in one image: a deterministic Python program that draws a newspaper front page — the Kerch Bridge collapse leads, with the Manila Quad summit, the Hormuz tanker attack, Japan's scramble, Cyclone Akvan, UK sanctions, Mongolia's president resigning and Dhoni's IPL retirement. Pure standard library, no network, same bytes on every run.
+Sum up 17 November's world news in one image: 40 stories, 13 illustrated, a world map and three equal leads — the densest front page of the day.
 
 ## Run it
 
